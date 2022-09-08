@@ -2,10 +2,12 @@ package com.projetospring.course.config;
 
 import com.projetospring.course.entities.Category;
 import com.projetospring.course.entities.Order;
+import com.projetospring.course.entities.Product;
 import com.projetospring.course.entities.User;
 import com.projetospring.course.entities.enums.OrderStatus;
 import com.projetospring.course.repositories.CategoryRepository;
 import com.projetospring.course.repositories.OrderRepository;
+import com.projetospring.course.repositories.ProductRepository;
 import com.projetospring.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner{
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -35,6 +40,11 @@ public class TestConfig implements CommandLineRunner{
         Category c1 = new Category(null, "Eletronics");
         Category c2 = new Category(null, "Books");
         Category c3 = new Category(null, "Computers");
+
+        Product p1 = new Product(null, "Lord of the Rings", "aaaaaaaaaaaaaaaaaaaaa", 90.5, "");
+        Product p2 = new Product(null, "Smart TV", "bbbbbbbbbbbbbbbbbbbbb", 130.5, "");
+        Product p3 = new Product(null, "PC Gamer", "ccccccccccccccccccccc", 850.5, "");
+        Product p4 = new Product(null, "Ball", "ddddddddddddddddddddd", 630.5, "");
 
         User u1 = new User(null, "Vanessa", "teste1@teste.com", "99999999", "123456");
         User u2 = new User(null, "Kerstin", "teste2@teste.com", "88888888", "123456");
@@ -44,9 +54,12 @@ public class TestConfig implements CommandLineRunner{
 
 
 
+
+
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2));
         categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
+        productRepository.saveAll((Arrays.asList(p1, p2, p3, p4)));
 
 
     }
