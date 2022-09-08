@@ -1,14 +1,8 @@
 package com.projetospring.course.config;
 
-import com.projetospring.course.entities.Category;
-import com.projetospring.course.entities.Order;
-import com.projetospring.course.entities.Product;
-import com.projetospring.course.entities.User;
+import com.projetospring.course.entities.*;
 import com.projetospring.course.entities.enums.OrderStatus;
-import com.projetospring.course.repositories.CategoryRepository;
-import com.projetospring.course.repositories.OrderRepository;
-import com.projetospring.course.repositories.ProductRepository;
-import com.projetospring.course.repositories.UserRepository;
+import com.projetospring.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner{
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -64,12 +61,15 @@ public class TestConfig implements CommandLineRunner{
         Order o1 = new Order(null, Instant.parse("2019-01-20T00:00:00Z"), OrderStatus.PAID, u1);
         Order o2 = new Order(null, Instant.parse("2020-06-20T00:00:00Z"),OrderStatus.WAITING_PAYMENT, u2);
 
-
-
-
-
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p1.getPrice());
+        OrderItem oi4 = new OrderItem(o2, p4, 2, p4.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
 
 
